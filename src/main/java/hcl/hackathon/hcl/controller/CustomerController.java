@@ -4,6 +4,10 @@ import hcl.hackathon.hcl.controller.requests.AddFavouriteBankRequest;
 import hcl.hackathon.hcl.controller.requests.DeleteFavouriteBankRequest;
 import hcl.hackathon.hcl.controller.requests.EditFavouriteBankRequest;
 import hcl.hackathon.hcl.service.FavouriteBankAccountService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,22 +20,33 @@ public class CustomerController {
     private FavouriteBankAccountService favouriteBankAccountService;
 
     @PostMapping("/api/customers/login")
+    @ApiOperation(value = "User login",
+            notes = "Service that allows the User to login.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "The service was not found."),
+            @ApiResponse(code = 500, message = "An unexpected error has occurred.") })
     public ResponseEntity<?> login() {
         return ResponseEntity.ok("null");
     }
 
     @PostMapping("/api/customers/favouriteaccounts")
-    public ResponseEntity<?> addFavourites(AddFavouriteBankRequest request) {
+    @ApiOperation(value = "User add favourites",
+            notes = "Service that allows the User add favourite account.")
+    public ResponseEntity<?> addFavourites(@ApiParam(value = "Add favourite information.")AddFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
 
     @PutMapping("/api/customers/favouriteaccounts")
-    public ResponseEntity<?> addFavourites(EditFavouriteBankRequest request) {
+    @ApiOperation(value = "User edit favourites",
+            notes = "Service that allows the User to edit the favourite account.")
+    public ResponseEntity<?> addFavourites(@ApiParam(value = "Edit favourite information")EditFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
 
     @DeleteMapping("/api/customers/favouriteaccounts")
-    public ResponseEntity<?> deleteAccount(@RequestBody DeleteFavouriteBankRequest request) {
+    @ApiOperation(value = "User delete favourites",
+            notes = "Service that allows the User to delete the favourite account.")
+    public ResponseEntity<?> deleteAccount(@ApiParam(value = "Delete favourite information") @RequestBody DeleteFavouriteBankRequest request) {
         if (request.getAccountId() == null || favouriteBankAccountService.findById(request.getAccountId()).isEmpty()) {
             return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
         } else {
