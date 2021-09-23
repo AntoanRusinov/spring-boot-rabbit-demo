@@ -1,11 +1,8 @@
 package hcl.hackathon.hcl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import hcl.hackathon.hcl.entities.Bank;
 import hcl.hackathon.hcl.entities.Customer;
-import hcl.hackathon.hcl.entities.FavouriteBankAccount;
 import hcl.hackathon.hcl.service.BankService;
-import hcl.hackathon.hcl.service.ConverterService;
 import hcl.hackathon.hcl.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -26,11 +23,9 @@ public class CommandLiner implements CommandLineRunner {
     private BankService bankService;
     @Autowired
     private CustomerService customerService;
-    @Autowired
-    private ConverterService converterService;
 
     @Override
-    public void run(String... args) throws JsonProcessingException {
+    public void run(String... args) {
         if (bankService.count() == 0) {
             bankService.insertBanks(Arrays.asList(
                     new Bank("1234", "Nairobi Bank"),
@@ -47,25 +42,6 @@ public class CommandLiner implements CommandLineRunner {
             ));
         }
 
-        // Antoan's test for converting json to xml
-        FavouriteBankAccount favouriteBankAccount = new FavouriteBankAccount();
-        favouriteBankAccount.setBank_name("My custom bank");
-        favouriteBankAccount.setIban("IBAN 212415 5421358932");
-        favouriteBankAccount.setName("Test");
-        favouriteBankAccount.setId(11111L);
-
-        String jsonInput = "{\n" +
-                "    \"first_name\" : \"TRY\",\n" +
-                "    \"last_name\" : \"HARD\",\n" +
-                "    \"email_id\" : \"try123@hard.com\",\n" +
-                "    \"primary_contact\" : \"123456\",\n" +
-                "    \"secondary_contact\" : \"654321\",\n" +
-                "    \"nickname\" : \"HCL\",\n" +
-                "    \"personalIdNumber\" : \"67890\"\n" +
-                "}";
-
-        converterService.convertObjectToXml(favouriteBankAccount);
-        converterService.convertJsonToXml(jsonInput);
     }
 
 }
