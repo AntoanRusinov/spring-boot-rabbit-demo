@@ -9,26 +9,25 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController(value = "/api/customers")
+@RestController
 public class CustomerController {
 
-
-    @PostMapping("/login")
+    @PostMapping("/api/customers/login")
     public ResponseEntity<?> login() {
         return ResponseEntity.ok("null");
     }
 
-    @PostMapping("/favouriteaccounts")
+    @PostMapping("/api/customers/favouriteaccounts")
     public ResponseEntity<?> addFavourites(AddFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
 
-    @PutMapping("/favouriteaccounts")
+    @PutMapping("/api/customers/favouriteaccounts")
     public ResponseEntity<?> addFavourites(EditFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
 
-    @DeleteMapping("/favouriteaccounts")
+    @DeleteMapping("/api/customers/favouriteaccounts")
     public ResponseEntity<?> addFavourites(DeleteFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
