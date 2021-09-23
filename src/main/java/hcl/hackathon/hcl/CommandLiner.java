@@ -18,13 +18,11 @@ import java.util.Arrays;
 public class CommandLiner implements CommandLineRunner {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
     private BankService bankService;
-
     @Autowired
     private CustomerService customerService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -43,5 +41,7 @@ public class CommandLiner implements CommandLineRunner {
                     new Customer(customerService.generateCustomerId(), passwordEncoder.encode("USER"), new ArrayList<>())
             ));
         }
+
     }
+
 }
