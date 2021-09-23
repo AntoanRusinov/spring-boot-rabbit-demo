@@ -1,18 +1,14 @@
 package hcl.hackathon.hcl.controller.requests;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class EditFavouriteBankRequest {
 
-    private Long accountId;
+    @NotBlank(message = "'AccountId' is mandatory")
+    private Long id;
+    @NotBlank(message = "'BankName' is mandatory")
+    private String name;
 
-    private String newAccountName;
-
-    private String newAccountNumber;
+    @Size(min = 10, max = 19)
+    @NotBlank(message = "'Iban' is mandatory")
+    private String iban;
 
 }

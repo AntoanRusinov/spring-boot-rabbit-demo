@@ -18,13 +18,11 @@ import java.util.Arrays;
 public class CommandLiner implements CommandLineRunner {
 
     @Autowired
+    PasswordEncoder passwordEncoder;
+    @Autowired
     private BankService bankService;
-
     @Autowired
     private CustomerService customerService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -39,9 +37,11 @@ public class CommandLiner implements CommandLineRunner {
 
         if (customerService.count() == 0) {
             customerService.insertCustomers(Arrays.asList(
-                    new Customer(customerService.generateCustomerId(), passwordEncoder.encode("ADMIN"), new ArrayList<>()),
+                    new Customer("1234567890", passwordEncoder.encode("ADMIN"), new ArrayList<>()),
                     new Customer(customerService.generateCustomerId(), passwordEncoder.encode("USER"), new ArrayList<>())
             ));
         }
+
     }
+
 }
