@@ -50,7 +50,7 @@ public class CustomerController {
     @PostMapping("/api/customers/favouriteaccounts")
     @ApiOperation(value = "User add favourites",
             notes = "Service that allows the User add favourite account.")
-    public ResponseEntity<?> addFavourites(@Valid @ApiParam(value = "Add favourite information.") AddFavouriteBankRequest request) {
+    public ResponseEntity<?> addFavourites(@Valid @ApiParam(value = "Add favourite information.") @RequestBody AddFavouriteBankRequest request) {
         bankService.addToFavourites(request);
         return ResponseEntity.ok("Account added as a favourite");
     }
@@ -58,7 +58,7 @@ public class CustomerController {
     @PutMapping("/api/customers/favouriteaccounts")
     @ApiOperation(value = "User edit favourites",
             notes = "Service that allows the User to edit the favourite account.")
-    public ResponseEntity<?> editFavourites(@Valid @ApiParam(value = "Edit favourite information") EditFavouriteBankRequest request) {
+    public ResponseEntity<?> editFavourites(@Valid @ApiParam(value = "Edit favourite information") @RequestBody EditFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
 

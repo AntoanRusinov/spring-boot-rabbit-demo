@@ -10,6 +10,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -27,6 +29,7 @@ public class CustomerFavouritesListener {
     @Autowired
     private FavouriteBankAccountService favouriteBankAccountService;
 
+    @Retryable( value = Exception.class, maxAttempts = 1)
     @RabbitListener(queues = MQConfig.ADD_QUEUE)
     public void addBankToFavourites(MQAddFavouriteMessage message) {
         log.info("Message: " + message + " received from queue: " + MQConfig.ADD_QUEUE);
@@ -39,7 +42,7 @@ public class CustomerFavouritesListener {
 
             if (bankName == null || bankName.equals("")) {
                 bankName = "The IBAN provided is not correct! Please, try again with a different one!";
-//                throw new Exception("We couldn't find such bank in our DB!");
+                //  throw new Exception("We couldn't find such bank in our DB!");
             }
 
             favouriteBankAccount.setBank_name(bankName);
