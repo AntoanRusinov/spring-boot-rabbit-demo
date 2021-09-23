@@ -14,13 +14,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Data
 public class AddFavouriteBankRequest {
-	
-    
+
     @NotBlank(message = "'BankName' is mandatory")
     private String name;
     @NotBlank(message = "'Iban' is mandatory")
     private String iban;
-
 
 }
 

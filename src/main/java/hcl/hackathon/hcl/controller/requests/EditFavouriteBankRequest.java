@@ -14,12 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @Data
 public class EditFavouriteBankRequest {
-	
-	
-	 @NotBlank(message = "'AccountId' is mandatory")
-	 private Long id;
+
+    @NotBlank(message = "'AccountId' is mandatory")
+    private Long id;
     @NotBlank(message = "'BankName' is mandatory")
     private String name;
     @NotBlank(message = "'Iban' is mandatory")
     private String iban;
+
 }
