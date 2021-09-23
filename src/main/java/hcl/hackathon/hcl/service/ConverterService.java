@@ -10,19 +10,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConverterService {
 
-    public void convertObjectToXml(Object objectToConvert) throws JsonProcessingException {
+    public String convertObjectToXml(Object objectToConvert) throws JsonProcessingException {
         XmlMapper xmlMapper = new XmlMapper();
+        String convertedXml = xmlMapper.writeValueAsString(objectToConvert);
         log.info("Object of type " + objectToConvert.getClass() + " was converted into xml");
-        log.info(xmlMapper.writeValueAsString(objectToConvert));
+        log.info(convertedXml);
+        return convertedXml;
     }
 
-    public void convertJsonToXml(String jsonInput) throws JsonProcessingException {
+    public String convertJsonToXml(String jsonInput) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         Object currentObject = objectMapper.readValue(jsonInput, Object.class);
 
         XmlMapper xmlMapper = new XmlMapper();
+        String convertedXml = xmlMapper.writeValueAsString(currentObject);
+
         log.info("Object of type " + currentObject.getClass() + " was converted into xml");
-        log.info(xmlMapper.writeValueAsString(currentObject));
+        log.info(convertedXml);
+        return convertedXml;
     }
 
 }
