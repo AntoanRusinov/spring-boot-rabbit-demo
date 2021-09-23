@@ -18,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class CustomerController {
 
@@ -45,7 +47,7 @@ public class CustomerController {
     @PostMapping("/api/customers/favouriteaccounts")
     @ApiOperation(value = "User add favourites",
             notes = "Service that allows the User add favourite account.")
-    public ResponseEntity<?> addFavourites(@ApiParam(value = "Add favourite information.") AddFavouriteBankRequest request) {
+    public ResponseEntity<?> addFavourites(@Valid @ApiParam(value = "Add favourite information.") AddFavouriteBankRequest request) {
         bankService.addToFavourites(request);
         return ResponseEntity.ok("Account added as a favourite");
     }
@@ -53,14 +55,14 @@ public class CustomerController {
     @PutMapping("/api/customers/favouriteaccounts")
     @ApiOperation(value = "User edit favourites",
             notes = "Service that allows the User to edit the favourite account.")
-    public ResponseEntity<?> editFavourites(@ApiParam(value = "Edit favourite information") EditFavouriteBankRequest request) {
+    public ResponseEntity<?> editFavourites(@Valid @ApiParam(value = "Edit favourite information") EditFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
 
     @DeleteMapping("/api/customers/favouriteaccounts")
     @ApiOperation(value = "User delete favourites",
             notes = "Service that allows the User to delete the favourite account.")
-    public ResponseEntity<?> deleteAccount(@ApiParam(value = "Delete favourite information") @RequestBody DeleteFavouriteBankRequest request) {
+    public ResponseEntity<?> deleteAccount(@Valid @ApiParam(value = "Delete favourite information") @RequestBody DeleteFavouriteBankRequest request) {
         if (request.getAccountId() == null || favouriteBankAccountService.findById(request.getAccountId()).isEmpty()) {
             return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
         } else {
