@@ -20,11 +20,15 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String customer_id;
+    private String customerId;
 
     private String password;
 
-    @OneToMany(targetEntity = FavouriteBankAccount.class, fetch = FetchType.EAGER)
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "customer_id")
     private List<FavouriteBankAccount> favouriteBankAccounts;
 
 }
