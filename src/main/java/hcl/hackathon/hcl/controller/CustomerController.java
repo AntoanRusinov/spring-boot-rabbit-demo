@@ -3,6 +3,7 @@ package hcl.hackathon.hcl.controller;
 import hcl.hackathon.hcl.controller.requests.AddFavouriteBankRequest;
 import hcl.hackathon.hcl.controller.requests.DeleteFavouriteBankRequest;
 import hcl.hackathon.hcl.controller.requests.EditFavouriteBankRequest;
+import hcl.hackathon.hcl.entities.InternalUserDetails;
 import hcl.hackathon.hcl.service.FavouriteBankAccountService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -10,11 +11,17 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import hcl.hackathon.hcl.entities.Customer;
+import hcl.hackathon.hcl.service.CustomerService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CustomerController {
+
+    @Autowired
+    CustomerService customerService;
 
     @Autowired
     private FavouriteBankAccountService favouriteBankAccountService;
@@ -26,7 +33,9 @@ public class CustomerController {
             @ApiResponse(code = 404, message = "The service was not found."),
             @ApiResponse(code = 500, message = "An unexpected error has occurred.") })
     public ResponseEntity<?> login() {
-        return ResponseEntity.ok("null");
+        InternalUserDetails principal = (InternalUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Customer customer = customerService.getCustomerByCustomerId(principal.getUsername());
+        return ResponseEntity.ok(customer.getFavouriteBankAccounts());
     }
 
     @PostMapping("/api/customers/favouriteaccounts")
