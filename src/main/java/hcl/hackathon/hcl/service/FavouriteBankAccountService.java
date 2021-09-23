@@ -13,6 +13,10 @@ public class FavouriteBankAccountService {
     @Autowired
     private FavouriteBankAccountRepository favouriteBankAccountRepository;
 
+    public FavouriteBankAccount addFavouriteBankAccount(FavouriteBankAccount favouriteBankAccount) {
+        return favouriteBankAccountRepository.save(favouriteBankAccount);
+    }
+
     public Optional<FavouriteBankAccount> findById(Long id) {
         return favouriteBankAccountRepository.findById(id);
     }
