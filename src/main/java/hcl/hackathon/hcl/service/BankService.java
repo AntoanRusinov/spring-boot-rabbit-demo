@@ -33,7 +33,7 @@ public class BankService {
         template.convertAndSend(
                 MQConfig.EXCHANGE,
                 MQConfig.ADD_ROUTING,
-                new MQAddFavouriteMessage(UUID.randomUUID().toString(), request.getAccountName(), request.getIban()));
+                new MQAddFavouriteMessage(UUID.randomUUID().toString(), request.getName(), request.getIban()));
     }
 
     public String resolveBankNameByCode(String bankCode) {
