@@ -37,7 +37,7 @@ public class CommandLiner implements CommandLineRunner {
 
         if (customerService.count() == 0) {
             customerService.insertCustomers(Arrays.asList(
-                    new Customer(customerService.generateCustomerId(), passwordEncoder.encode("ADMIN"), new ArrayList<>()),
+                    new Customer("1234567890", passwordEncoder.encode("ADMIN"), new ArrayList<>()),
                     new Customer(customerService.generateCustomerId(), passwordEncoder.encode("USER"), new ArrayList<>())
             ));
         }
