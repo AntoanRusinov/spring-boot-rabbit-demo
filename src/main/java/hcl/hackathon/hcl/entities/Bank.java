@@ -23,4 +23,8 @@ public class Bank {
 
     private String bank_name;
 
+    public Bank(String code, String bank_name) {
+        this.code = code;
+        this.bank_name = bank_name;
+    }
 }
