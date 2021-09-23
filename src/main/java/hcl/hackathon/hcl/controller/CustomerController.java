@@ -27,6 +27,7 @@ public class CustomerController {
     public ResponseEntity<?> addFavourites(EditFavouriteBankRequest request) {
         return ResponseEntity.ok("null");
     }
+
     @DeleteMapping("/favouriteaccounts")
     public ResponseEntity<?> addFavourites(DeleteFavouriteBankRequest request) {
         return ResponseEntity.ok("null");

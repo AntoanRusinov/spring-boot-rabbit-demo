@@ -22,4 +22,5 @@ public class Bank {
     private String code;
 
     private String bank_name;
+
 }

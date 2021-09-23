@@ -22,4 +22,5 @@ public class FavouriteBankAccount {
     private String name;
     private String iban;
     private String bank_name;
+
 }
