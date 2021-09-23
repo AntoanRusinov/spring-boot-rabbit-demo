@@ -1,5 +1,8 @@
 package hcl.hackathon.hcl.controller.requests;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 public class EditFavouriteBankRequest {
 
     @NotBlank(message = "'AccountId' is mandatory")
