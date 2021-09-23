@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class EditFavouriteBankRequest {
     private Long id;
     @NotBlank(message = "'BankName' is mandatory")
     private String name;
+
+    @Size(min = 10, max = 19)
     @NotBlank(message = "'Iban' is mandatory")
     private String iban;
 
