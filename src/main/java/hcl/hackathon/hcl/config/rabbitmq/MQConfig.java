@@ -13,20 +13,20 @@ public class MQConfig {
 
     public static final String EXCHANGE = "message_exchange";
 
-    public static final String REGISTRATION_QUEUE = "add_message_queue";
-    public static final String REGISTRATION_ROUTING = "add_message_routing";
+    public static final String ADD_QUEUE = "add_message_queue";
+    public static final String ADD_ROUTING = "add_message_routing";
 
-    public static final String EMAIL_QUEUE = "keep_message_queue";
-    public static final String EMAIL_ROUTING = "keep_message_routing";
+    public static final String KEEP_QUEUE = "keep_message_queue";
+    public static final String KEEP_ROUTING = "keep_message_routing";
 
     @Bean
     public Queue regQueue() {
-        return new Queue(REGISTRATION_QUEUE);
+        return new Queue(ADD_QUEUE);
     }
 
     @Bean
     public Queue mailQueue() {
-        return new Queue(EMAIL_QUEUE);
+        return new Queue(KEEP_QUEUE);
     }
 
     @Bean
@@ -39,7 +39,7 @@ public class MQConfig {
         return BindingBuilder
                 .bind(regQueue)
                 .to(mainTopicExchange)
-                .with(REGISTRATION_ROUTING);
+                .with(ADD_ROUTING);
     }
 
     @Bean
@@ -47,7 +47,7 @@ public class MQConfig {
         return BindingBuilder
                 .bind(mailQueue)
                 .to(mainTopicExchange)
-                .with(EMAIL_ROUTING);
+                .with(KEEP_ROUTING);
     }
 
     @Bean
